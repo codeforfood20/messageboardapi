@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MessageBoard.Api.Core.Models;
 using MessageBoard.Api.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -25,11 +26,11 @@ namespace MessageBoard.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var response = _messageBoard.Get();
+                var response = await _messageBoard.GetAsync();
 
                 return Ok(response);
             }
@@ -42,13 +43,13 @@ namespace MessageBoard.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] SendMessageRequest request)
+        public async Task<IActionResult> Create([FromBody] SendMessageRequest request)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _messageBoard.Send(request);
+                    await _messageBoard.SendAsync(request);
 
                     return Ok();
                 }

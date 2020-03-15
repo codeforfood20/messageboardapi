@@ -16,7 +16,7 @@ namespace MessageBoard.Api.Core.Extensions
 
             return services.AddDbContext<MessageBoardDbContext>(options => 
                 options.UseSqlServer(connectionString,
-                b => b.MigrationsAssembly("MessageBoard.Api.Data"))
+                    b => b.MigrationsAssembly("MessageBoard.Api.Data"))
                 );
         }
     }

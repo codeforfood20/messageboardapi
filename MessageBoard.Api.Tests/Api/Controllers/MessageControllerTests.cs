@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MessageBoard.Api.Tests.Api.Controllers
@@ -22,11 +23,11 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public void MessagesController_Create_Returns_InternalServerError()
+        public async Task MessagesController_Create_Returns_InternalServerError()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
-            service.Setup(s => s.Send(It.IsAny<SendMessageRequest>()))
+            service.Setup(s => s.SendAsync(It.IsAny<SendMessageRequest>()))
                                 .Throws<Exception>();
             var request = new SendMessageRequest
             {
@@ -37,7 +38,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var controller = new MessagesController(service.Object);
 
             // Act
-            var result = controller.Create(request);
+            var result = await controller.Create(request);
 
             // Assert
             Assert.IsType<StatusCodeResult>(result);
@@ -45,11 +46,11 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public void MessagesController_Create_Returns_OKResult()
+        public async Task MessagesController_Create_Returns_OKResult()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
-            service.Setup(s => s.Send(It.IsAny<SendMessageRequest>()))
+            service.Setup(s => s.SendAsync(It.IsAny<SendMessageRequest>()))
                                 .Verifiable();
             var request = new SendMessageRequest
             {
@@ -60,24 +61,23 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var controller = new MessagesController(service.Object);
 
             // Act
-            var result = controller.Create(request);
+            var result = await controller.Create(request);
 
             // Assert
             Assert.IsType<OkResult>(result);
         }
 
         [Fact]
-        public void MessagesController_Get_Returns_InternalServerError()
+        public async Task MessagesController_Get_Returns_InternalServerError()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
-            service.Setup(s => s.Get())
-                                .Throws<Exception>();
-
+            service.Setup(s => s.GetAsync()).ThrowsAsync(new Exception());
+                         
             var controller = new MessagesController(service.Object);
 
             // Act
-            var result = controller.Get();
+            var result = await controller.Get();
 
             // Assert
             Assert.IsType<StatusCodeResult>(result);
@@ -85,7 +85,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public void MessagesController_Get_Returns_OKObjectResult()
+        public async Task MessagesController_Get_Returns_OKObjectResult()
         {
             // Arrange            
             var response = new GetMessagesResponse(new List<Message>
@@ -94,12 +94,12 @@ namespace MessageBoard.Api.Tests.Api.Controllers
                 new Message { User = "Tom", Content = "It works.", Created = DateTime.Now }
             });
             var service = new Mock<IMessageBoardService>();
-            service.Setup(s => s.Get()).Returns(response);
+            service.Setup(s => s.GetAsync()).ReturnsAsync(response);
 
             var controller = new MessagesController(service.Object);
 
             // Act
-            var result = controller.Get();           
+            var result = await controller.Get();           
 
             // Assert
             Assert.IsType<OkObjectResult>(result);

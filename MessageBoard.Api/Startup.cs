@@ -1,4 +1,5 @@
 using MessageBoard.Api.Core.Extensions;
+using MessageBoard.Api.Core.Mappers;
 using MessageBoard.Api.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace MessageBoard.Api
 
             services.AddDb(Configuration.GetConnectionString("DefaultConnection"));
 
+            services.AddTransient<IMessageMapper, MessageMapper>();
             services.AddTransient<IMessageBoardService, MessageBoardService>();
             
             services.AddSwaggerGen(c =>

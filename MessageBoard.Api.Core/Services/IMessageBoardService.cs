@@ -1,11 +1,12 @@
 ﻿using MessageBoard.Api.Core.Models;
+using System.Threading.Tasks;
 
 namespace MessageBoard.Api.Core.Services
 {
     public interface IMessageBoardService
     {
-        GetMessagesResponse Get();
+        Task<GetMessagesResponse> GetAsync();
 
-        void Send(SendMessageRequest request);        
+        Task SendAsync(SendMessageRequest request);        
     }
 }
