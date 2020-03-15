@@ -45,7 +45,7 @@ namespace MessageBoard.Api.Core.Mappers
             {
                 User = messageDb.User,
                 Content = messageDb.Content,
-                Created = messageDb.Created1
+                Created = messageDb.Created
             };
         }
     }

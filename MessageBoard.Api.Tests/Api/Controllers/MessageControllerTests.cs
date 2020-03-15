@@ -13,7 +13,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
     public class MessageControllerTests
     {
         [Fact]
-        public void MessagesController_Constructor_ThrowsNullException()
+        public void MessagesController_Constructor_ThrowsNullException_When_MessageBoardService_Is_Null()
         {
             // Arrange
             IMessageBoardService service = null;
@@ -23,7 +23,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public async Task MessagesController_Create_Returns_InternalServerError()
+        public async Task MessagesController_Create_Returns_InternalServerError_When_MessageBoardService_Throws_Exception()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
@@ -46,7 +46,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public async Task MessagesController_Create_Returns_OKResult()
+        public async Task MessagesController_Create_Returns_OKResult_When_MessageBoardService_Is_Valid()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
@@ -68,7 +68,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public async Task MessagesController_Get_Returns_InternalServerError()
+        public async Task MessagesController_Get_Returns_InternalServerError_When_MessageBoardService_Throws_Exception()
         {
             // Arrange
             var service = new Mock<IMessageBoardService>();
@@ -85,7 +85,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         }
 
         [Fact]
-        public async Task MessagesController_Get_Returns_OKObjectResult()
+        public async Task MessagesController_Get_Returns_OKObjectResult_When_MessageBoardService_Is_Valid()
         {
             // Arrange            
             var response = new GetMessagesResponse(new List<Message>
