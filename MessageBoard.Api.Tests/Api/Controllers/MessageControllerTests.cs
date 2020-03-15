@@ -2,6 +2,7 @@
 using MessageBoard.Api.Core.Models;
 using MessageBoard.Api.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,21 @@ namespace MessageBoard.Api.Tests.Api.Controllers
         {
             // Arrange
             IMessageBoardService service = null;
+            ILogger<MessagesController> logger = null;
 
             // Act and Assert
-            Assert.Throws<ArgumentNullException>(() => new MessagesController(service));
+            Assert.Throws<ArgumentNullException>(() => new MessagesController(service, logger));
+        }
+
+        [Fact]
+        public void MessagesController_Constructor_ThrowsNullException_When_Logger_Is_Null()
+        {
+            // Arrange
+            var service = new Mock<IMessageBoardService>();
+            ILogger<MessagesController> logger = null;
+
+            // Act and Assert
+            Assert.Throws<ArgumentNullException>(() => new MessagesController(service.Object, logger));
         }
 
         [Fact]
@@ -29,13 +42,15 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var service = new Mock<IMessageBoardService>();
             service.Setup(s => s.SendAsync(It.IsAny<SendMessageRequest>()))
                                 .Throws<Exception>();
+            var logger = new Mock<ILogger<MessagesController>>();
+
             var request = new SendMessageRequest
             {
                 User = "Tom",
                 Message = "Hello, Rick"
             };
 
-            var controller = new MessagesController(service.Object);
+            var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
             var result = await controller.Create(request);
@@ -52,13 +67,15 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var service = new Mock<IMessageBoardService>();
             service.Setup(s => s.SendAsync(It.IsAny<SendMessageRequest>()))
                                 .Verifiable();
+            var logger = new Mock<ILogger<MessagesController>>();
+
             var request = new SendMessageRequest
             {
                 User = "Tom",
                 Message = "Hello, Rick"
             };
 
-            var controller = new MessagesController(service.Object);
+            var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
             var result = await controller.Create(request);
@@ -73,8 +90,10 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             // Arrange
             var service = new Mock<IMessageBoardService>();
             service.Setup(s => s.GetAsync()).ThrowsAsync(new Exception());
-                         
-            var controller = new MessagesController(service.Object);
+
+            var logger = new Mock<ILogger<MessagesController>>();
+
+            var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
             var result = await controller.Get();
@@ -96,7 +115,9 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var service = new Mock<IMessageBoardService>();
             service.Setup(s => s.GetAsync()).ReturnsAsync(response);
 
-            var controller = new MessagesController(service.Object);
+            var logger = new Mock<ILogger<MessagesController>>();
+
+            var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
             var result = await controller.Get();           

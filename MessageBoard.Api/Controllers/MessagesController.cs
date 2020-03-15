@@ -6,6 +6,7 @@ using MessageBoard.Api.Core.Models;
 using MessageBoard.Api.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace MessageBoard.Api.Controllers
 {
@@ -13,16 +14,23 @@ namespace MessageBoard.Api.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private IMessageBoardService _messageBoard;
+        private readonly IMessageBoardService _messageBoard;
+        private readonly ILogger<MessagesController> _logger;
 
-        public MessagesController(IMessageBoardService messageBoard)
+        public MessagesController(IMessageBoardService messageBoard, ILogger<MessagesController> logger)
         {
             if(messageBoard == null)
             {
                 throw new ArgumentNullException("messageBoard");
             }
 
+            if(logger == null)
+            {
+                throw new ArgumentNullException("logger");
+            }
+
             _messageBoard = messageBoard;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -30,13 +38,14 @@ namespace MessageBoard.Api.Controllers
         {
             try
             {
+                _logger.LogInformation("Getting messages");
                 var response = await _messageBoard.GetAsync();
 
                 return Ok(response);
             }
             catch(Exception ex)
             {
-                // Log exception
+                _logger.LogError(ex.Message);
 
                 return StatusCode(500);
             }           
@@ -49,13 +58,14 @@ namespace MessageBoard.Api.Controllers
             {
                 try
                 {
+                    _logger.LogInformation("Sending message...");
                     await _messageBoard.SendAsync(request);
 
                     return Ok();
                 }
                 catch(Exception ex)
                 {
-                    // Log exception
+                    _logger.LogError(ex.Message);
 
                     return StatusCode(500);
                 }             
