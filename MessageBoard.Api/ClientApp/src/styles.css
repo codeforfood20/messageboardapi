@@ -16,4 +16,62 @@ code {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.post-reply-btn, .reply-btn {
+    width: 200px !important;
+}
+
+.form-user {
+    width: 20%;
+}
+
+.form-actions {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.btn-action {
+  display: inline-block;
+  width: calc(50% - 4px);
+  margin: 0 20px;
+}
+
+.table-message-container {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0;
+}
+
+.table-message-header {
+  height: 40px;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.table-message-user {
+  width: 40%;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #ffffff;
+}
+
+.table-message-created {
+  width: 59%;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #ffffff;
+  text-align: right;
+}
+
+.table-message-body {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.table-message {
+  background-color: #e6e6ff;
+}

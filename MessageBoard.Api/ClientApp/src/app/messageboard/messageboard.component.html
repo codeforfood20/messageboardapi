@@ -3,29 +3,27 @@
 <table class='table' aria-labelledby="tableLabel" *ngIf="messagesResponse.messages">
   <tbody>
     <tr *ngFor="let message of messagesResponse.messages">
-      <td>
-        <mat-card>
-          <mat-card-title>
-            <mat-grid-list cols="2" rowHeight="1em">
-              <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="lightblue">
-                <div class="message-user">{{message.user}}</div>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="lightblue">
-                <div class="message-created">{{message.created | date: 'medium' }}</div>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </mat-card-title>
-          <mat-card-content style="border: 1px solid red;">
-            <div class="message-content">{{message.content}}</div>
-          </mat-card-content>
-        </mat-card>
+      <td class="table-message">        
+        <table class="table-message-container">
+          <thead>
+            <tr class="table-message-header">
+              <td class="table-message-user">{{message.user}}</td>
+              <td class="table-message-created">{{message.created | date: 'medium' }}</td>
+            </tr>
+            <tr class="table-message-body">
+              <td colspan="2" class="table-message-content">
+                {{message.content}}
+              </td>
+            </tr>
+          </thead>
+        </table>
       </td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td>
-        <button mat-button color="primary" (click)="reply()" [hidden]="showReply">Reply</button>
+        <button mat-button color="primary" (click)="reply()" [hidden]="showReply" class="reply-btn btn btn-danger btn-block btn-lg btn-action">Reply</button>
       </td>
     </tr>
     <tr *ngIf="showReply">
@@ -34,23 +32,20 @@
           <form [formGroup]="form" (ngSubmit)="postReply()">
 
             <div class="form-group input-group-lg">
-              <input class="form-control" placeholder="User" formControlName="user">
+              <input class="form-control form-user" placeholder="User" formControlName="user" maxlength="20" size="20">
             </div>
 
             <div class="form-group input-group-lg">
-              <input class="form-control" placeholder="Message" formControlName="message">
+              <textarea class="form-control" placeholder="Message" formControlName="message"></textarea>
             </div>
 
             <div class="form-group">
-              <button class="btn btn-danger btn-block btn-lg">Post Reply</button>
+              <div class="form-actions">
+                <button class="btn btn-danger btn-block btn-lg post-reply-btn btn-action">Post Reply</button>
+                <a [routerLink]="" (click)="cancelReply()">Cancel</a>
+              </div>            
             </div>
           </form>
-          <mat-card-actions>
-            <div class="message-content">
-              <button mat-button color="primary" type="submit">Post Reply</button>
-              <a [routerLink]="" (click)="cancelReply()">Cancel</a>
-            </div>
-          </mat-card-actions>
         </mat-card>
       </td>
     </tr>
