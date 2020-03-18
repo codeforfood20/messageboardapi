@@ -24,7 +24,7 @@ namespace MessageBoard.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers();
 
             services.AddDb(Configuration.GetConnectionString("DefaultConnection"));
 
@@ -32,6 +32,7 @@ namespace MessageBoard.Api
             services.AddTransient<IMessageBoardService, MessageBoardService>();
 
             // In production, the Angular files will be served from this directory
+           
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -67,30 +68,25 @@ namespace MessageBoard.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
             
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
+                spa.Options.SourcePath = "ClientApp";                
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+           
             /*
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Message Board API V1");
             });
-           */
+            */
         }
     }
 }

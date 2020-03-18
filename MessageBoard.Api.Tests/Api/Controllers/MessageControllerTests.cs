@@ -53,7 +53,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
-            var result = await controller.Create(request);
+            var result = await controller.Post(request);
 
             // Assert
             Assert.IsType<StatusCodeResult>(result);
@@ -78,7 +78,7 @@ namespace MessageBoard.Api.Tests.Api.Controllers
             var controller = new MessagesController(service.Object, logger.Object);
 
             // Act
-            var result = await controller.Create(request);
+            var result = await controller.Post(request);
 
             // Assert
             Assert.IsType<OkResult>(result);

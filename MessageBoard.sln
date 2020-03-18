@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBoard.Api", "MessageBoard.Api\MessageBoard.Api.csproj", "{97FEE330-2574-4312-B628-A033FCBF54A9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBoard.Api.Core", "MessageBoard.Api.Core\MessageBoard.Api.Core.csproj", "{1F8B9C99-BCF4-4F89-88D2-F4EC7EBF4629}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBoard.Api.Data", "MessageBoard.Api.Data\MessageBoard.Api.Data.csproj", "{5F903C77-3C6A-4BCD-87B7-D842A837C3FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoard.Api.Tests", "MessageBoard.Api.Tests\MessageBoard.Api.Tests.csproj", "{AC59B837-22F6-49D8-B44B-E9919F24819E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBoard.Api.Tests", "MessageBoard.Api.Tests\MessageBoard.Api.Tests.csproj", "{AC59B837-22F6-49D8-B44B-E9919F24819E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoard.Api", "MessageBoard.Api\MessageBoard.Api.csproj", "{615A33C2-08A4-4FA4-9E36-3C5EC1E18D09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{97FEE330-2574-4312-B628-A033FCBF54A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97FEE330-2574-4312-B628-A033FCBF54A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97FEE330-2574-4312-B628-A033FCBF54A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97FEE330-2574-4312-B628-A033FCBF54A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F8B9C99-BCF4-4F89-88D2-F4EC7EBF4629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F8B9C99-BCF4-4F89-88D2-F4EC7EBF4629}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F8B9C99-BCF4-4F89-88D2-F4EC7EBF4629}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{AC59B837-22F6-49D8-B44B-E9919F24819E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC59B837-22F6-49D8-B44B-E9919F24819E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC59B837-22F6-49D8-B44B-E9919F24819E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{615A33C2-08A4-4FA4-9E36-3C5EC1E18D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{615A33C2-08A4-4FA4-9E36-3C5EC1E18D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{615A33C2-08A4-4FA4-9E36-3C5EC1E18D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{615A33C2-08A4-4FA4-9E36-3C5EC1E18D09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

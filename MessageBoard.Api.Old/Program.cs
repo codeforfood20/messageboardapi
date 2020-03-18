@@ -18,11 +18,11 @@ namespace MessageBoard.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-               .ConfigureLogging(logging =>
-               {
-                   logging.ClearProviders();
-                   logging.AddDebug();
-               })
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddDebug();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
