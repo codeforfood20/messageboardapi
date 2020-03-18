@@ -81,7 +81,10 @@ namespace MessageBoard.Api
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    // 1.  Run npm Start in command line under ClientApp folder.
+                    // 2.  Run this project.
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
             /*
